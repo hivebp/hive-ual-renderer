@@ -102,7 +102,12 @@ export class UALProvider extends Component {
        * @desc hides the modal
        * @return {Void}
        */
-      hideModal: () => this.setState({ modal: false, loading: true, message: i18n.t('loadingAuthenticators') }),
+      hideModal: () =>
+        this.setState({
+          modal: false,
+          loading: true,
+          message: i18n.t('loadingAuthenticators'),
+        }),
       /**
        * @memberof UAL
        * @function
@@ -122,7 +127,10 @@ export class UALProvider extends Component {
        */
       logout: () => {
         const { activeAuthenticator } = this.state
-        this.setState(DEFAULT_STATUS, () => activeAuthenticator && this.fullLogout(activeAuthenticator))
+        this.setState(
+          DEFAULT_STATUS,
+          () => activeAuthenticator && this.fullLogout(activeAuthenticator),
+        )
       },
       /**
        * @memberof UAL
@@ -134,7 +142,7 @@ export class UALProvider extends Component {
       restart: () => {
         this.setState({ DEFAULT_STATUS }, () => {
           const { availableAuthenticators } = this.state
-          availableAuthenticators.forEach(auth => auth.reset())
+          availableAuthenticators.forEach((auth) => auth.reset())
           this.setState(availableAuthenticators)
         })
       },
@@ -155,18 +163,26 @@ export class UALProvider extends Component {
        * @param {Authenticator} authenticator
        * @param {boolean} [false] isAutoLogin
        */
-      authenticateWithoutAccountInput: async (authenticator, isAutoLogin = false) => {
+      authenticateWithoutAccountInput: async (
+        authenticator,
+        isAutoLogin = false,
+      ) => {
         const { broadcastStatus } = this.state
         broadcastStatus({
           loading: true,
-          message: i18n.t('continueWithAuthenticator', { authenticatorName: authenticator.getStyle().text }),
+          message: i18n.t('continueWithAuthenticator', {
+            authenticatorName: authenticator.getStyle().text,
+          }),
           activeAuthenticator: authenticator,
         })
         try {
           const users = await authenticator.login()
           const accountName = await users[0].getAccountName()
           if (!isAutoLogin) {
-            window.localStorage.setItem('UALLoggedInAuthType', authenticator.getName())
+            window.localStorage.setItem(
+              'UALLoggedInAuthType',
+              authenticator.getName(),
+            )
             this.setUALInvalidateAt(authenticator)
           }
           broadcastStatus({
@@ -202,13 +218,18 @@ export class UALProvider extends Component {
         })
         try {
           const users = await authenticator.login(accountInput)
-          window.localStorage.setItem('UALLoggedInAuthType', authenticator.getName())
+          window.localStorage.setItem(
+            'UALLoggedInAuthType',
+            authenticator.getName(),
+          )
           window.localStorage.setItem('UALAccountName', accountInput)
           broadcastStatus({
             activeUser: users[users.length - 1],
             activeAuthenticator: authenticator,
             users,
-            message: i18n.t('currentlyLoggedInAs', { accountName: accountInput }),
+            message: i18n.t('currentlyLoggedInAs', {
+              accountName: accountInput,
+            }),
           })
           this.setUALInvalidateAt(authenticator)
         } catch (err) {
@@ -223,16 +244,26 @@ export class UALProvider extends Component {
   }
 
   componentDidMount() {
-    const { chains, appName, authenticators, authenticateWithoutAccountInput, submitAccountForLogin } = this.state
+    const {
+      chains,
+      appName,
+      authenticators,
+      authenticateWithoutAccountInput,
+      submitAccountForLogin,
+    } = this.state
     let type = window.localStorage.getItem('UALLoggedInAuthType')
     const invalidate = window.localStorage.getItem('UALInvalidateAt')
     const accountName = window.localStorage.getItem('UALAccountName')
     type = this.checkForInvalidatedSession(type, invalidate)
     const ual = new UAL(chains, appName, authenticators)
-    const { availableAuthenticators, autoLoginAuthenticator } = ual.getAuthenticators()
+    const { availableAuthenticators, autoLoginAuthenticator } =
+      ual.getAuthenticators()
     try {
       if (type) {
-        const authenticator = this.getAuthenticatorInstance(type, availableAuthenticators)
+        const authenticator = this.getAuthenticatorInstance(
+          type,
+          availableAuthenticators,
+        )
         if (!authenticator) {
           throw new Error('authenticator instance not found')
         }
@@ -260,9 +291,17 @@ export class UALProvider extends Component {
   }
 
   componentDidUpdate() {
-    const { loading, message, availableAuthenticators, broadcastStatus } = this.state
-    if (loading && message === i18n.t('loadingAuthenticators') && availableAuthenticators.length) {
-      broadcastStatus({ message: i18n.t('authenticatorsLoaded'), loading: false })
+    const { loading, message, availableAuthenticators, broadcastStatus } =
+      this.state
+    if (
+      loading &&
+      message === i18n.t('loadingAuthenticators') &&
+      availableAuthenticators.length
+    ) {
+      broadcastStatus({
+        message: i18n.t('authenticatorsLoaded'),
+        loading: false,
+      })
     }
   }
 
@@ -275,7 +314,9 @@ export class UALProvider extends Component {
    * @return {number|boolean}
    */
   getAuthenticatorInstance = (type, availableAuthenticators) => {
-    const loggedIn = availableAuthenticators.filter(auth => auth.getName() === type)
+    const loggedIn = availableAuthenticators.filter(
+      (auth) => auth.getName() === type,
+    )
     if (!loggedIn.length) {
       this.clearCache()
     }
@@ -323,14 +364,17 @@ export class UALProvider extends Component {
   fetchAuthenticators = (availableAuthenticators, autoLoginAuthenticator) => {
     const { authenticateWithoutAccountInput } = this.state
     if (autoLoginAuthenticator) {
-      this.setState({ availableAuthenticators: [autoLoginAuthenticator] }, () => {
-        const availableCheck = setInterval(() => {
-          if (!autoLoginAuthenticator.isLoading()) {
-            clearInterval(availableCheck)
-            authenticateWithoutAccountInput(autoLoginAuthenticator, true)
-          }
-        }, 250)
-      })
+      this.setState(
+        { availableAuthenticators: [autoLoginAuthenticator] },
+        () => {
+          const availableCheck = setInterval(() => {
+            if (!autoLoginAuthenticator.isLoading()) {
+              clearInterval(availableCheck)
+              authenticateWithoutAccountInput(autoLoginAuthenticator, true)
+            }
+          }, 250)
+        },
+      )
     } else {
       this.setState({ availableAuthenticators }, () => {
         this.setState({ message: i18n.t('authenticatorsLoaded') })
@@ -359,17 +403,20 @@ export class UALProvider extends Component {
    */
   fullLogout = (authenticator) => {
     this.clearCache()
-    authenticator.logout()
-      .catch(e => console.warn(e))
+    authenticator.logout().catch((e) => console.warn(e))
   }
 
   render() {
-    const modal = this.state.modal && <div style={modalStyles}><UALBox /></div>
+    const modal = this.state.modal && (
+      <div style={modalStyles}>
+        <UALBox />
+      </div>
+    )
     return (
       <UALContext.Provider value={this.state}>
         <style>{baseFont}</style>
-        { modal }
-        { this.props.children }
+        {modal}
+        {this.props.children}
       </UALContext.Provider>
     )
   }
@@ -385,7 +432,6 @@ export class UALProvider extends Component {
  * @prop {boolean} modal - whether or not to show modal
  */
 UALProvider.propTypes = {
-
   chains: PropTypes.arrayOf(PropTypes.object).isRequired,
   authenticators: PropTypes.arrayOf(PropTypes.object).isRequired,
   children: PropTypes.oneOfType([

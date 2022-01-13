@@ -26,7 +26,9 @@ class UALBoxBase extends Component {
   }
 
   componentDidMount() {
-    const { ual: { activeUser, modal, hideModal } } = this.props
+    const {
+      ual: { activeUser, modal, hideModal },
+    } = this.props
     if (activeUser && modal) {
       hideModal()
     } else {
@@ -35,7 +37,9 @@ class UALBoxBase extends Component {
   }
 
   componentDidUpdate() {
-    const { ual: { activeUser, modal, hideModal } } = this.props
+    const {
+      ual: { activeUser, modal, hideModal },
+    } = this.props
     if (activeUser && modal) {
       hideModal()
     }
@@ -49,7 +53,9 @@ class UALBoxBase extends Component {
    * @param {Authenticator} authenticator
    */
   authenticate = async (authenticator) => {
-    const { ual: { authenticateWithoutAccountInput } } = this.props
+    const {
+      ual: { authenticateWithoutAccountInput },
+    } = this.props
     const needsAccountName = await authenticator.shouldRequestAccountName()
     if (needsAccountName) {
       this.authenticateWithAccountInput(authenticator)
@@ -66,7 +72,9 @@ class UALBoxBase extends Component {
    */
   checkAuthenticators = () => {
     const { availableAuthenticators } = this.props.ual
-    const nonErroredAuthenticators = availableAuthenticators.filter(auth => !auth.isErrored())
+    const nonErroredAuthenticators = availableAuthenticators.filter(
+      (auth) => !auth.isErrored(),
+    )
     if (!nonErroredAuthenticators.length) {
       this.setState({
         instructions: boxTitles.ERROR,
@@ -90,13 +98,15 @@ class UALBoxBase extends Component {
       instructions: i18n.t('enterUsername'),
       secondaryInstructions: '',
     }
-    this.setState({
-      authenticator,
-      containerExit: true,
-      containerEnter: false,
-      transitionForward: true,
-    },
-    this.transitionToReset(loginState))
+    this.setState(
+      {
+        authenticator,
+        containerExit: true,
+        containerEnter: false,
+        transitionForward: true,
+      },
+      this.transitionToReset(loginState),
+    )
   }
 
   /**
@@ -116,13 +126,15 @@ class UALBoxBase extends Component {
       instructions: i18n.t('welcomeAccount', { authName }),
       secondaryInstructions,
     }
-    this.setState({
-      authenticator,
-      containerExit: true,
-      containerEnter: false,
-      transitionForward: true,
-    },
-    this.transitionToReset(installState))
+    this.setState(
+      {
+        authenticator,
+        containerExit: true,
+        containerEnter: false,
+        transitionForward: true,
+      },
+      this.transitionToReset(installState),
+    )
   }
 
   /**
@@ -142,12 +154,14 @@ class UALBoxBase extends Component {
       instructions,
       secondaryInstructions,
     }
-    this.setState({
-      containerExit: true,
-      containerEnter: false,
-      transitionForward: false,
-    },
-    this.transitionToReset(previousSelectState))
+    this.setState(
+      {
+        containerExit: true,
+        containerEnter: false,
+        transitionForward: false,
+      },
+      this.transitionToReset(previousSelectState),
+    )
   }
 
   /**
@@ -168,7 +182,10 @@ class UALBoxBase extends Component {
    * @param {Object} nextState
    */
   resetContainer = (nextState) => {
-    this.setState({ containerExit: false, containerEnter: false }, this.transitionToComplete(nextState))
+    this.setState(
+      { containerExit: false, containerEnter: false },
+      this.transitionToComplete(nextState),
+    )
   }
 
   /**
@@ -177,7 +194,9 @@ class UALBoxBase extends Component {
    * @param {Object} nextState
    */
   transitionToReset = (nextState) => {
-    setTimeout(() => { this.resetContainer(nextState) }, 300)
+    setTimeout(() => {
+      this.resetContainer(nextState)
+    }, 300)
   }
 
   /**
@@ -186,33 +205,38 @@ class UALBoxBase extends Component {
    * @param {Object} nextState
    */
   transitionToComplete = (nextState) => {
-    setTimeout(() => { this.setState(nextState) }, 50)
+    setTimeout(() => {
+      this.setState(nextState)
+    }, 50)
   }
 
   render() {
-    const {
-      containerEnter,
-      containerExit,
-      transitionForward,
-      ...state
-    } = this.state
+    const { containerEnter, containerExit, transitionForward, ...state } =
+      this.state
     const { ual } = this.props
     const app = { ...state, ...ual }
     const background = UALBoxParts.boxBackground(app)
     return (
-      <div id='ual-box' style={{ ...box, ...background }}>
+      <div id="ual-box" style={{ ...box, ...background }}>
         {UALBoxParts.exitButton(app)}
-        <div style={titleWrapper}>
-          {UALBoxParts.boxTitle(app)}
-        </div>
-        <UALContainer enter={containerEnter} exit={containerExit} transitionForward={transitionForward}>
+        <div style={titleWrapper}>{UALBoxParts.boxTitle(app)}</div>
+        <UALContainer
+          enter={containerEnter}
+          exit={containerExit}
+          transitionForward={transitionForward}
+        >
           {UALBoxParts.secondaryInstructions(app, this.refreshBox)}
-          {UALBoxParts.mainContent(app, this.authenticate, this.checkAuthenticators, this.enterInstallScreen)}
+          {UALBoxParts.mainContent(
+            app,
+            this.authenticate,
+            this.checkAuthenticators,
+            this.enterInstallScreen,
+          )}
           {UALBoxParts.errorMessage(ual)}
           {UALBoxParts.backButton(app, this.goBackToAuthSelect)}
           {UALBoxParts.learnMore(app)}
         </UALContainer>
-        <style>{ mediaQuery }</style>
+        <style>{mediaQuery}</style>
       </div>
     )
   }

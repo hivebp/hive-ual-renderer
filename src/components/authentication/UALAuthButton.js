@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import Tooltip from 'react-tooltip'
-import { FaChevronRight, FaDownload } from 'react-icons/fa'
-import { IoMdInformationCircleOutline } from 'react-icons/io'
-
-import { UALLoadingIcon } from '../misc/UALLoadingIcon'
+import { buttonState, errorColors } from '../../constants/authentication'
 import { boxTitles } from '../../constants/box'
-
 import {
   authButton,
-  buttonHover,
   authIcon,
   authIconWrapper,
   authText,
   authTextFont,
+  buttonHover,
   chevron,
   errored,
 } from '../../styles/authenticator'
-
-import { buttonState, errorColors } from '../../constants/authentication'
+import {
+  FaChevronRight,
+  FaDownload,
+  IoMdInformationCircleOutline,
+} from '../icons'
+import { UALLoadingIcon } from '../misc/UALLoadingIcon'
 
 /**
  * Component that provides a button for logging in with a given Authenticator.
@@ -84,7 +84,10 @@ export class UALAuthButton extends Component {
   checkButtonAvailability = () => {
     const { instructions } = this.props
     const { button } = this.state
-    if (instructions === boxTitles.ERROR && button !== buttonState.UNAVAILABLE) {
+    if (
+      instructions === boxTitles.ERROR &&
+      button !== buttonState.UNAVAILABLE
+    ) {
       this.setState({ button: buttonState.UNAVAILABLE })
     }
   }
@@ -96,8 +99,14 @@ export class UALAuthButton extends Component {
   checkButtonStatusOnRetry = () => {
     const { instructions } = this.props
     const { button } = this.state
-    if (instructions === boxTitles.NORMAL && button === buttonState.UNAVAILABLE) {
-      this.setState({ button: buttonState.LOADING }, this.startButtonStateChecker)
+    if (
+      instructions === boxTitles.NORMAL &&
+      button === buttonState.UNAVAILABLE
+    ) {
+      this.setState(
+        { button: buttonState.LOADING },
+        this.startButtonStateChecker,
+      )
     }
   }
 
@@ -124,7 +133,8 @@ export class UALAuthButton extends Component {
    */
   attemptAuthentication = () => {
     const { button } = this.state
-    const { onAuthenticatorSelect, authenticator, onRequestInstall } = this.props
+    const { onAuthenticatorSelect, authenticator, onRequestInstall } =
+      this.props
     if (button === buttonState.AVAILABLE) {
       onAuthenticatorSelect(authenticator)
     }
@@ -139,7 +149,10 @@ export class UALAuthButton extends Component {
    */
   activateGenericSize = () => {
     const { button } = this.state
-    if (button === buttonState.AVAILABLE || button === buttonState.UNAVAILABLE) {
+    if (
+      button === buttonState.AVAILABLE ||
+      button === buttonState.UNAVAILABLE
+    ) {
       this.setState({ hoverStyle: {} })
     }
   }
@@ -150,7 +163,10 @@ export class UALAuthButton extends Component {
    */
   activateHoverSize = () => {
     const { button } = this.state
-    if (button === buttonState.AVAILABLE || button === buttonState.UNAVAILABLE) {
+    if (
+      button === buttonState.AVAILABLE ||
+      button === buttonState.UNAVAILABLE
+    ) {
       this.setState({ hoverStyle: buttonHover })
     }
   }
@@ -162,43 +178,53 @@ export class UALAuthButton extends Component {
   renderIcon = () => {
     const { button } = this.state
     switch (button) {
-    case buttonState.LOADING:
-      return <UALLoadingIcon />
-    case buttonState.ERRORED:
-      return <IoMdInformationCircleOutline style={errored} />
-    case buttonState.UNAVAILABLE:
-      return <FaDownload />
-    default:
-      return <FaChevronRight />
+      case buttonState.LOADING:
+        return <UALLoadingIcon />
+      case buttonState.ERRORED:
+        return <IoMdInformationCircleOutline style={errored} />
+      case buttonState.UNAVAILABLE:
+        return <FaDownload />
+      default:
+        return <FaChevronRight />
     }
   }
 
   render() {
     const { icon, background, textColor, text, hoverStyle, button } = this.state
     const { authenticator } = this.props
-    const trueBackground = button === buttonState.ERRORED ? errorColors.LIGHT_GREY
-      : background
-    const trueTextColor = button === buttonState.ERRORED ? errorColors.DARK_GREY
-      : textColor
-    const errorTooltip = authenticator.getError() ? authenticator.getError().message : ''
-    const toolTip = errorTooltip.length > 0 && button !== buttonState.UNAVAILABLE && <Tooltip />
+    const trueBackground =
+      button === buttonState.ERRORED ? errorColors.LIGHT_GREY : background
+    const trueTextColor =
+      button === buttonState.ERRORED ? errorColors.DARK_GREY : textColor
+    const errorTooltip = authenticator.getError()
+      ? authenticator.getError().message
+      : ''
+    const toolTip = errorTooltip.length > 0 &&
+      button !== buttonState.UNAVAILABLE && <Tooltip />
     return (
       <div
         onClick={this.attemptAuthentication}
-        role='button'
+        role="button"
         aria-label={text}
         tabIndex={this.props.index}
-        style={{ ...authButton, background: trueBackground, ...hoverStyle, color: trueTextColor }}
+        style={{
+          ...authButton,
+          background: trueBackground,
+          ...hoverStyle,
+          color: trueTextColor,
+        }}
         onMouseEnter={this.activateHoverSize}
         onMouseLeave={this.activateGenericSize}
         data-tip={errorTooltip}
-        data-effect='solid'
+        data-effect="solid"
       >
         {toolTip}
-        <div style={authIconWrapper}><img style={authIcon} src={icon} alt='' /></div>
+        <div style={authIconWrapper}>
+          <img style={authIcon} src={icon} alt="" />
+        </div>
         <div style={authText}>
           <span style={authTextFont}>{text}</span>
-          <span style={chevron}>{ this.renderIcon() }</span>
+          <span style={chevron}>{this.renderIcon()}</span>
         </div>
       </div>
     )

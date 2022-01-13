@@ -5,10 +5,10 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'jsx'],
   moduleNameMapper: {
     'ual-scatter': '<rootDir>/__mocks__/Scatter.js',
-    'providerProps': '<rootDir>/__mocks__/providerProps.js',
-    'localStorageMock': '<rootDir>/__mocks__/localStorageMock.js',
-    'UALAccountInputProps': '<rootDir>/__mocks__/UALAccountInputProps.js',
-    'AuthenticatorMocks': '<rootDir>/__mocks__/AuthenticatorMocks.js',
+    providerProps: '<rootDir>/__mocks__/providerProps.js',
+    localStorageMock: '<rootDir>/__mocks__/localStorageMock.js',
+    UALAccountInputProps: '<rootDir>/__mocks__/UALAccountInputProps.js',
+    AuthenticatorMocks: '<rootDir>/__mocks__/AuthenticatorMocks.js',
   },
   setupFiles: ['<rootDir>/__setup__/enzyme.config.js'],
   testEnvironment: 'jsdom',
@@ -18,6 +18,6 @@ module.exports = {
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   verbose: false,
   transform: {
-      '^.+\\.js$': '<rootDir>/__setup__/config.jest.transform.js'
+    '^.+\\.js$': '<rootDir>/__setup__/config.jest.transform.js',
   },
-};
+}

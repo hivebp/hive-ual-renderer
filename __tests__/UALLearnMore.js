@@ -1,5 +1,8 @@
 import React from 'react'
-import { IoMdInformationCircleOutline, IoMdCloseCircleOutline } from 'react-icons/io'
+import {
+  IoMdInformationCircleOutline,
+  IoMdCloseCircleOutline,
+} from 'react-icons/io'
 
 import { shallow } from 'enzyme'
 import { UALLearnMore } from '../src/components/info/UALLearnMore'

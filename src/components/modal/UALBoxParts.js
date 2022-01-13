@@ -10,9 +10,16 @@ import { UALLoadingIcon } from '../misc/UALLoadingIcon'
 import { UALInstallAuth } from '../authentication/UALInstallAuth'
 
 import { title, titleSecondary } from '../../styles/title'
-import { backButton, backButtonWrapper, backButtonText } from '../../styles/buttons/back'
+import {
+  backButton,
+  backButtonWrapper,
+  backButtonText,
+} from '../../styles/buttons/back'
 import { retryButton } from '../../styles/buttons/retry'
-import { secondaryInstructionsText, secondaryInstructionsLight } from '../../styles/instructions'
+import {
+  secondaryInstructionsText,
+  secondaryInstructionsLight,
+} from '../../styles/instructions'
 import { darkenColor } from '../../utils'
 
 /**
@@ -31,7 +38,14 @@ export class UALBoxParts {
    * @name authButton
    * @return {ReactElement}
    */
-  static authButton(authenticator, index, instructions, authenticate, checkAuthenticators, enterInstallScreen) {
+  static authButton(
+    authenticator,
+    index,
+    instructions,
+    authenticate,
+    checkAuthenticators,
+    enterInstallScreen,
+  ) {
     return (
       <UALAuthButton
         key={index}
@@ -71,12 +85,15 @@ export class UALBoxParts {
    * @name secondaryInstructions
    * @return {HTML}
    */
-  static secondaryInstructions({ secondaryInstructions, showInstallScreen }, refreshBox) {
+  static secondaryInstructions(
+    { secondaryInstructions, showInstallScreen },
+    refreshBox,
+  ) {
     const retry = (
       <strong
-        role='button'
-        aria-label='Go Back'
-        tabIndex='-1'
+        role="button"
+        aria-label="Go Back"
+        tabIndex="-1"
         style={retryButton}
         onClick={refreshBox}
       >
@@ -84,7 +101,9 @@ export class UALBoxParts {
       </strong>
     )
     if (secondaryInstructions !== '') {
-      const trueStyle = showInstallScreen ? secondaryInstructionsLight : secondaryInstructionsText
+      const trueStyle = showInstallScreen
+        ? secondaryInstructionsLight
+        : secondaryInstructionsText
       return (
         <p style={trueStyle}>
           {secondaryInstructions}
@@ -117,12 +136,21 @@ export class UALBoxParts {
    * @name backButton
    * @return {HTML}
    */
-  static backButton({ showAccountInput, error, loading, logout, showInstallScreen }, goBackToAuthSelect) {
+  static backButton(
+    { showAccountInput, error, loading, logout, showInstallScreen },
+    goBackToAuthSelect,
+  ) {
     const goBackAction = error ? logout : goBackToAuthSelect
     if ((error || showAccountInput || showInstallScreen) && !loading) {
       return (
         <p style={backButtonWrapper}>
-          <span role='button' aria-label='Go Back' tabIndex='-1' style={backButton} onClick={goBackAction}>
+          <span
+            role="button"
+            aria-label="Go Back"
+            tabIndex="-1"
+            style={backButton}
+            onClick={goBackAction}
+          >
             <strong style={backButtonText}>{i18n.t('goBack')}</strong>
           </span>
         </p>
@@ -141,9 +169,7 @@ export class UALBoxParts {
    */
   static noAvailableAuthenticators() {
     return (
-      <p
-        style={secondaryInstructionsText}
-      >
+      <p style={secondaryInstructionsText}>
         {i18n.t('noAuthenticatorsAvailableForDevice')}
       </p>
     )
@@ -157,7 +183,12 @@ export class UALBoxParts {
    * @name mainContent
    * @return {ReactElement[]}
    */
-  static mainContent(app, authenticate, checkAuthenticators, enterInstallScreen) {
+  static mainContent(
+    app,
+    authenticate,
+    checkAuthenticators,
+    enterInstallScreen,
+  ) {
     const {
       submitAccountForLogin,
       authenticator,
@@ -168,14 +199,14 @@ export class UALBoxParts {
       availableAuthenticators,
       instructions,
     } = app
-    const authProps = [
-      authenticate,
-      checkAuthenticators,
-      enterInstallScreen,
-    ]
-    let mainContent = !loading
-      ? availableAuthenticators.map((auth, index) => this.authButton(auth, index, instructions, ...authProps))
-      : <UALLoadingIcon withContainer />
+    const authProps = [authenticate, checkAuthenticators, enterInstallScreen]
+    let mainContent = !loading ? (
+      availableAuthenticators.map((auth, index) =>
+        this.authButton(auth, index, instructions, ...authProps),
+      )
+    ) : (
+      <UALLoadingIcon withContainer />
+    )
     if (!loading && !availableAuthenticators.length) {
       mainContent = this.noAvailableAuthenticators()
     }
@@ -225,15 +256,23 @@ export class UALBoxParts {
    * @name boxBackground
    * @return {Object}
    */
-  static boxBackground({ error, loading, showAccountInput, showInstallScreen, activeAuthenticator, authenticator }) {
-    let authenticatorStyle = activeAuthenticator && activeAuthenticator.getStyle().background
+  static boxBackground({
+    error,
+    loading,
+    showAccountInput,
+    showInstallScreen,
+    activeAuthenticator,
+    authenticator,
+  }) {
+    let authenticatorStyle =
+      activeAuthenticator && activeAuthenticator.getStyle().background
     let background = {}
     if (!authenticatorStyle) {
       authenticatorStyle = authenticator && authenticator.getStyle().background
     }
     if (showAccountInput || loading || showInstallScreen || error) {
       background = {
-        backgroundColor: darkenColor(authenticatorStyle)
+        backgroundColor: darkenColor(authenticatorStyle),
       }
     }
     return background
@@ -247,9 +286,24 @@ export class UALBoxParts {
    * @name boxTitle
    * @return {HTML}
    */
-  static boxTitle({ error, instructions, showAccountInput, showInstallScreen, loading, message }) {
-    const boxTitle = error ? i18n.t('errorDuring', { src: error.source, type: error.type.toLowerCase() }) : instructions
-    const titleStyle = error || showAccountInput || loading || showInstallScreen ? titleSecondary : title
+  static boxTitle({
+    error,
+    instructions,
+    showAccountInput,
+    showInstallScreen,
+    loading,
+    message,
+  }) {
+    const boxTitle = error
+      ? i18n.t('errorDuring', {
+          src: error.source,
+          type: error.type.toLowerCase(),
+        })
+      : instructions
+    const titleStyle =
+      error || showAccountInput || loading || showInstallScreen
+        ? titleSecondary
+        : title
     const titleContent = !loading || error ? boxTitle : message
     return <h1 style={titleStyle}>{titleContent}</h1>
   }
@@ -262,10 +316,18 @@ export class UALBoxParts {
    * @name exitButton
    * @return {ReactElement}
    */
-  static exitButton({ error, showAccountInput, showInstallScreen, loading, hideModal }) {
+  static exitButton({
+    error,
+    showAccountInput,
+    showInstallScreen,
+    loading,
+    hideModal,
+  }) {
     return (
       <UALExitButton
-        isSecondaryStyle={!!error || showAccountInput || !!loading || showInstallScreen}
+        isSecondaryStyle={
+          !!error || showAccountInput || !!loading || showInstallScreen
+        }
         hideModal={hideModal}
       />
     )

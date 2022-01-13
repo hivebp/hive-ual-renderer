@@ -5,13 +5,18 @@ import i18n from '../../i18n'
 
 import { UALLoadingIcon } from '../misc/UALLoadingIcon'
 
-import { inputWrapper, inputStyle, buttonEnabled, buttonDisabled } from '../../styles/input'
+import {
+  inputWrapper,
+  inputStyle,
+  buttonEnabled,
+  buttonDisabled,
+} from '../../styles/input'
 import { buttonHover } from '../../styles/authenticator'
 import { buttonText } from '../../styles/installation'
 
 export const StyledInput = styled.input`
   &::-webkit-input-placeholder {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
   }
 `
 
@@ -56,7 +61,10 @@ export class UALAccountInput extends Component {
   submitFromKeyboard = (e) => {
     const { submitAccountForLogin, authenticator } = this.props
     const { accountInput } = this.state
-    return (e.which === 13 || e.keyCode === 13) && submitAccountForLogin(accountInput, authenticator)
+    return (
+      (e.which === 13 || e.keyCode === 13) &&
+      submitAccountForLogin(accountInput, authenticator)
+    )
   }
 
   /**
@@ -66,7 +74,9 @@ export class UALAccountInput extends Component {
    */
   updateButtonWithInput = (e) => {
     const accountInput = e.target.value
-    const isValid = accountInput.match(this.validator) && accountInput.match(this.validator)[0] === accountInput
+    const isValid =
+      accountInput.match(this.validator) &&
+      accountInput.match(this.validator)[0] === accountInput
     if (isValid || !accountInput.length) {
       this.setState({ accountInput })
     }
@@ -102,24 +112,28 @@ export class UALAccountInput extends Component {
     return (
       <div style={inputWrapper}>
         <StyledInput
-          className='text-input'
+          className="text-input"
           style={inputStyle}
-          type='text'
+          type="text"
           placeholder={i18n.t('accountName')}
           value={accountInput}
           onChange={this.updateButtonWithInput}
           onKeyPress={this.submitFromKeyboard}
-          ref={(input) => { this.inputField = input }}
-          autoCapitalize='none'
+          ref={(input) => {
+            this.inputField = input
+          }}
+          autoCapitalize="none"
         />
         <div
-          role='button'
-          aria-label='Continue'
-          tabIndex='-1'
+          role="button"
+          aria-label="Continue"
+          tabIndex="-1"
           style={{ ...buttonStyle, background, ...hoverStyle }}
           onMouseEnter={this.activateHoverSize}
           onMouseLeave={this.activateGenericSize}
-          onClick={() => accountInput && submitAccountForLogin(accountInput, authenticator)}
+          onClick={() =>
+            accountInput && submitAccountForLogin(accountInput, authenticator)
+          }
         >
           <div style={buttonText}>{i18n.t('continue')}</div>
         </div>
@@ -128,7 +142,11 @@ export class UALAccountInput extends Component {
   }
 
   render() {
-    return !this.props.loading ? this.renderInput() : <UALLoadingIcon withContainer />
+    return !this.props.loading ? (
+      this.renderInput()
+    ) : (
+      <UALLoadingIcon withContainer />
+    )
   }
 }
 

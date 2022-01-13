@@ -49,10 +49,12 @@ export class Scatter extends Authenticator {
 
   async init() {
     this.scatterIsLoading = false
-    if (!await ScatterJS.scatter.connect(this.appName)) {
-      this.initError = new UALScatterError('Error occurred while connecting',
+    if (!(await ScatterJS.scatter.connect(this.appName))) {
+      this.initError = new UALScatterError(
+        'Error occurred while connecting',
         'initialization',
-        null)
+        null,
+      )
 
       this.scatterIsLoading = false
 
@@ -105,11 +107,7 @@ export class Scatter extends Authenticator {
 
       return this.users
     } catch (e) {
-      throw new UALScatterError(
-        'Unable to login',
-        'login',
-        e,
-      )
+      throw new UALScatterError('Unable to login', 'login', e)
     }
   }
 
@@ -117,9 +115,7 @@ export class Scatter extends Authenticator {
     try {
       this.scatter.logout()
     } catch (error) {
-      throw new UALScatterError('Error occurred during logout',
-        'logout',
-        error)
+      throw new UALScatterError('Error occurred during logout', 'logout', error)
     }
   }
 

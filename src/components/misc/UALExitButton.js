@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import { FaTimes } from 'react-icons/fa'
-
-import { exitWrapper, exit, exitHover } from '../../styles/buttons/exit'
+import React, { Component } from 'react'
+import { exit, exitHover, exitWrapper } from '../../styles/buttons/exit'
+import { FaTimes } from '../icons'
 
 /**
  * Component for rendering a modal close button.
@@ -46,9 +44,9 @@ export class UALExitButton extends Component {
     return (
       <p style={exitWrapper}>
         <span
-          role='button'
-          aria-label='exit'
-          tabIndex='-1'
+          role="button"
+          aria-label="exit"
+          tabIndex="-1"
           style={{ ...exit, ...hoverStyle, ...buttonColor }}
           onMouseEnter={this.scaleUp}
           onMouseLeave={this.scaleDown}

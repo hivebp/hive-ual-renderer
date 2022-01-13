@@ -1,6 +1,8 @@
 export const learnMore = {
-  transition: 'max-height ease 0.2s, transform ease-out 0.3s, opacity ease-in 0.7s',
-  WebkitTransition: 'max-height ease 0.2s, transform ease-out 0.3s, opacity ease-in 0.7s',
+  transition:
+    'max-height ease 0.2s, transform ease-out 0.3s, opacity ease-in 0.7s',
+  WebkitTransition:
+    'max-height ease 0.2s, transform ease-out 0.3s, opacity ease-in 0.7s',
   overflow: 'hidden',
   transform: 'scale(0.5)',
   transformOrigin: 'top left',

@@ -9,11 +9,13 @@ const EXAMPLE_ENV = {
 
 const exampleNet = {
   chainId: EXAMPLE_ENV.CHAIN_ID,
-  rpcEndpoints: [{
-    protocol: EXAMPLE_ENV.RPC_PROTOCOL,
-    host: EXAMPLE_ENV.RPC_HOST,
-    port: Number(EXAMPLE_ENV.RPC_PORT),
-  }],
+  rpcEndpoints: [
+    {
+      protocol: EXAMPLE_ENV.RPC_PROTOCOL,
+      host: EXAMPLE_ENV.RPC_HOST,
+      port: Number(EXAMPLE_ENV.RPC_PORT),
+    },
+  ],
 }
 
 export const providerProps = {

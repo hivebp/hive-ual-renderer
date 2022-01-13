@@ -13,12 +13,21 @@ describe('UALBox', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(<UALProvider {...providerProps}><UALBox /></UALProvider>)
+    wrapper = mount(
+      <UALProvider {...providerProps}>
+        <UALBox />
+      </UALProvider>,
+    )
   })
 
   it('displays an error message when UALProvider catches an error in its state', () => {
     wrapper.setState({
-      error: new UALError('Sample Error', UALErrorType.Initialization, new Error('Sample Error'), 'UAL'),
+      error: new UALError(
+        'Sample Error',
+        UALErrorType.Initialization,
+        new Error('Sample Error'),
+        'UAL',
+      ),
     })
     expect(wrapper.find(UALBox).find(UALErrorMessage).length).toBe(1)
   })

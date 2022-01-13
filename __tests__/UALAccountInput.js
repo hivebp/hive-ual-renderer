@@ -1,7 +1,10 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { loadingProps, availableProps } from 'UALAccountInputProps'
-import { UALAccountInput, StyledInput } from '../src/components/authentication/UALAccountInput'
+import {
+  UALAccountInput,
+  StyledInput,
+} from '../src/components/authentication/UALAccountInput'
 import { UALLoadingIcon } from '../src/components/misc/UALLoadingIcon'
 
 describe('UALAccountInput', () => {

@@ -8,26 +8,30 @@ import * as React from 'react'
 import ReactDOM from 'react-dom'
 
 const demoTransaction = {
-  actions: [{
-    account: 'eosio.token',
-    name: 'transfer',
-    authorization: [{
-      actor: '', // use account that was logged in
-      permission: 'active',
-    }],
-    data: {
-      from: '', // use account that was logged in
-      to: 'example',
-      quantity: '1.0000 EOS',
-      memo: 'UAL rocks!',
+  actions: [
+    {
+      account: 'eosio.token',
+      name: 'transfer',
+      authorization: [
+        {
+          actor: '', // use account that was logged in
+          permission: 'active',
+        },
+      ],
+      data: {
+        from: '', // use account that was logged in
+        to: 'example',
+        quantity: '1.0000 EOS',
+        memo: 'UAL rocks!',
+      },
     },
-  }],
+  ],
 }
 
 interface ExampleEnv {
-  CHAIN_ID: string,
-  RPC_PROTOCOL: string,
-  RPC_HOST: string,
+  CHAIN_ID: string
+  RPC_PROTOCOL: string
+  RPC_HOST: string
   RPC_PORT: string
 }
 
@@ -46,11 +50,13 @@ declare const EXAMPLE_ENV: ExampleEnv
 
 const exampleNet = {
   chainId: EXAMPLE_ENV.CHAIN_ID,
-  rpcEndpoints: [{
-    protocol: EXAMPLE_ENV.RPC_PROTOCOL,
-    host: EXAMPLE_ENV.RPC_HOST,
-    port: Number(EXAMPLE_ENV.RPC_PORT),
-  }]
+  rpcEndpoints: [
+    {
+      protocol: EXAMPLE_ENV.RPC_PROTOCOL,
+      host: EXAMPLE_ENV.RPC_HOST,
+      port: Number(EXAMPLE_ENV.RPC_PORT),
+    },
+  ],
 }
 
 const defaultState = {
@@ -59,14 +65,19 @@ const defaultState = {
   accountBalance: null,
 }
 
-class TransactionApp extends React.Component<TransactionProps, TransactionState> {
+class TransactionApp extends React.Component<
+  TransactionProps,
+  TransactionState
+> {
   static displayName = 'TransactionApp'
 
   constructor(props: TransactionProps) {
     super(props)
     this.state = {
       ...defaultState,
-      rpc: new JsonRpc(`${EXAMPLE_ENV.RPC_PROTOCOL}://${EXAMPLE_ENV.RPC_HOST}:${EXAMPLE_ENV.RPC_PORT}`)
+      rpc: new JsonRpc(
+        `${EXAMPLE_ENV.RPC_PROTOCOL}://${EXAMPLE_ENV.RPC_HOST}:${EXAMPLE_ENV.RPC_PORT}`,
+      ),
     }
     this.updateAccountBalance = this.updateAccountBalance.bind(this)
     this.updateAccountName = this.updateAccountName.bind(this)
@@ -76,7 +87,9 @@ class TransactionApp extends React.Component<TransactionProps, TransactionState>
   }
 
   public componentDidUpdate() {
-    const { ual: { activeUser } } = this.props
+    const {
+      ual: { activeUser },
+    } = this.props
     if (activeUser && !this.state.activeUser) {
       this.setState({ activeUser }, this.updateAccountName)
     } else if (!activeUser && this.state.activeUser) {
@@ -84,7 +97,7 @@ class TransactionApp extends React.Component<TransactionProps, TransactionState>
     }
   }
 
-  public async updateAccountName(): Promise<void>   {
+  public async updateAccountName(): Promise<void> {
     try {
       const accountName = await this.state.activeUser.getAccountName()
       this.setState({ accountName }, this.updateAccountBalance)
@@ -117,19 +130,22 @@ class TransactionApp extends React.Component<TransactionProps, TransactionState>
 
   public renderModalButton() {
     return (
-      <p className='ual-btn-wrapper'>
+      <p className="ual-btn-wrapper">
         <span
-          role='button'
+          role="button"
           onClick={this.props.ual.showModal}
-          className='ual-generic-button'>Show UAL Modal</span>
+          className="ual-generic-button"
+        >
+          Show UAL Modal
+        </span>
       </p>
     )
   }
 
   public renderTransferButton() {
     return (
-      <p className='ual-btn-wrapper'>
-        <span className='ual-generic-button blue' onClick={this.transfer}>
+      <p className="ual-btn-wrapper">
+        <span className="ual-generic-button blue" onClick={this.transfer}>
           {'Transfer 1 eos to example'}
         </span>
       </p>
@@ -137,11 +153,13 @@ class TransactionApp extends React.Component<TransactionProps, TransactionState>
   }
 
   public renderLogoutBtn = () => {
-    const { ual: { activeUser, activeAuthenticator, logout } } = this.props
+    const {
+      ual: { activeUser, activeAuthenticator, logout },
+    } = this.props
     if (!!activeUser && !!activeAuthenticator) {
       return (
-        <p className='ual-btn-wrapper'>
-          <span className='ual-generic-button red' onClick={logout}>
+        <p className="ual-btn-wrapper">
+          <span className="ual-generic-button red" onClick={logout}>
             {'Logout'}
           </span>
         </p>
@@ -150,7 +168,9 @@ class TransactionApp extends React.Component<TransactionProps, TransactionState>
   }
 
   public render() {
-    const { ual: { activeUser } } = this.props
+    const {
+      ual: { activeUser },
+    } = this.props
     const { accountBalance, accountName } = this.state
     const modalButton = !activeUser && this.renderModalButton()
     const loggedIn = accountName ? `Logged in as ${accountName}` : ''
@@ -159,8 +179,8 @@ class TransactionApp extends React.Component<TransactionProps, TransactionState>
     return (
       <div style={{ textAlign: 'center' }}>
         {modalButton}
-        <h3 className='ual-subtitle'>{loggedIn}</h3>
-        <h4 className='ual-subtitle'>{myBalance}</h4>
+        <h3 className="ual-subtitle">{loggedIn}</h3>
+        <h4 className="ual-subtitle">{myBalance}</h4>
         {transferBtn}
         {this.renderLogoutBtn()}
       </div>
@@ -178,7 +198,11 @@ const ledger = new Ledger([exampleNet])
 const scatter = new Scatter([exampleNet], { appName })
 
 ReactDOM.render(
-  <UALProvider chains={[exampleNet]} authenticators={[ledger, lynx, scatter]} appName={'My App'}>
+  <UALProvider
+    chains={[exampleNet]}
+    authenticators={[ledger, lynx, scatter]}
+    appName={'My App'}
+  >
     <TestAppConsumer />
   </UALProvider>,
   document.getElementById('ual-app') as HTMLElement,

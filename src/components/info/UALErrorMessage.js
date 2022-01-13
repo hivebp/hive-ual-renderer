@@ -15,9 +15,7 @@ import { errorMessage } from '../../styles/error'
 export const UALErrorMessage = ({ error: { message } }) => (
   <div style={base}>
     <p style={errorMessage}>
-      <IoMdInformationCircleOutline />
-      {' '}
-      {message}
+      <IoMdInformationCircleOutline /> {message}
     </p>
   </div>
 )
@@ -30,8 +28,6 @@ UALErrorMessage.displayName = 'UALErrorMessage'
  * @prop {UALError|Object} chains - list of chains the app supports
  */
 UALErrorMessage.propTypes = {
-  error: PropTypes.oneOfType([
-    PropTypes.instanceOf(UALError),
-    PropTypes.object,
-  ]).isRequired,
+  error: PropTypes.oneOfType([PropTypes.instanceOf(UALError), PropTypes.object])
+    .isRequired,
 }

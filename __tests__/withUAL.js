@@ -7,7 +7,7 @@ const mockContext = 'testContext'
 jest.mock('../src/components/provider/UALContext', () => ({
   UALContext: {
     Consumer: ({ children }) => children(mockContext),
-  }
+  },
 }))
 
 describe('withUAL', () => {
@@ -17,7 +17,7 @@ describe('withUAL', () => {
 
   beforeEach(() => {
     component = (props) => {
-      return <h1>Hello, {props.name}</h1>;
+      return <h1>Hello, {props.name}</h1>
     }
     name = 'testName'
     const WrappedComponent = withUAL(component)

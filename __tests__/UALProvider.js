@@ -6,17 +6,25 @@ import { UALBox } from '../src/components/modal/UALBox'
 import { UALProvider } from '../src/index'
 import { DEFAULT_STATUS } from '../src/constants/provider'
 
-jest.useFakeTimers();
+jest.useFakeTimers()
 
 describe('UALProvider', () => {
   describe('has a modal prop', () => {
     it('that renders a modal when it is true', () => {
-      const wrapper = shallow(<UALProvider {...providerProps} modal><div /></UALProvider>)
+      const wrapper = shallow(
+        <UALProvider {...providerProps} modal>
+          <div />
+        </UALProvider>,
+      )
       expect(wrapper.find(UALBox).length).toBe(1)
     })
 
     it('that does not render a modal when false', () => {
-      const wrapper = shallow(<UALProvider {...providerProps} appName='My app'><div /></UALProvider>)
+      const wrapper = shallow(
+        <UALProvider {...providerProps} appName="My app">
+          <div />
+        </UALProvider>,
+      )
       expect(wrapper.find(UALBox).length).toBe(0)
     })
   })
@@ -25,7 +33,11 @@ describe('UALProvider', () => {
     let wrapper
     beforeAll(() => {
       global.localStorage = localStorageMock
-      wrapper = shallow(<UALProvider {...providerProps} modal><div /></UALProvider>)
+      wrapper = shallow(
+        <UALProvider {...providerProps} modal>
+          <div />
+        </UALProvider>,
+      )
     })
 
     afterEach(() => {
@@ -41,8 +53,8 @@ describe('UALProvider', () => {
     it('that attempts auto-login if authenticator type is in localStorage and not invalidated', async () => {
       localStorage.setItem('UALAccountName', 'Example')
       localStorage.setItem('UALLoggedInAuthType', 'Scatter')
-      const invalidateAt = new Date();
-      invalidateAt.setSeconds(invalidateAt.getSeconds() + 100);
+      const invalidateAt = new Date()
+      invalidateAt.setSeconds(invalidateAt.getSeconds() + 100)
       window.localStorage.setItem('UALInvalidateAt', invalidateAt)
 
       const spy = jest.spyOn(wrapper.instance(), 'getAuthenticatorInstance')
@@ -59,8 +71,8 @@ describe('UALProvider', () => {
     it('that does not attempt to auto-login if localStorage is outdated', async () => {
       localStorage.setItem('UALAccountName', 'Example')
       localStorage.setItem('UALLoggedInAuthType', 'Scatter')
-      const invalidateAt = new Date();
-      invalidateAt.setSeconds(invalidateAt.getSeconds() - 1);
+      const invalidateAt = new Date()
+      invalidateAt.setSeconds(invalidateAt.getSeconds() - 1)
       window.localStorage.setItem('UALInvalidateAt', invalidateAt)
 
       const spy = jest.spyOn(wrapper.instance(), 'getAuthenticatorInstance')
@@ -73,7 +85,11 @@ describe('UALProvider', () => {
     let wrapper
 
     beforeEach(() => {
-      wrapper = shallow(<UALProvider {...providerProps} modal><div /></UALProvider>)
+      wrapper = shallow(
+        <UALProvider {...providerProps} modal>
+          <div />
+        </UALProvider>,
+      )
     })
 
     it('that sets the availableAuthenticators with all authenticators that should render', () => {
@@ -117,13 +133,21 @@ describe('UALProvider', () => {
     })
 
     beforeEach(() => {
-      wrapper = shallow(<UALProvider {...providerProps} modal><div /></UALProvider>)
+      wrapper = shallow(
+        <UALProvider {...providerProps} modal>
+          <div />
+        </UALProvider>,
+      )
     })
 
     it('that resets the state to default status', () => {
       wrapper.setState(DEFAULT_STATUS)
       const defaultState = JSON.stringify(wrapper.state())
-      wrapper = shallow(<UALProvider {...providerProps} modal><div /></UALProvider>)
+      wrapper = shallow(
+        <UALProvider {...providerProps} modal>
+          <div />
+        </UALProvider>,
+      )
       expect(JSON.stringify(wrapper.state())).not.toEqual(defaultState)
       wrapper.state().logout()
       expect(JSON.stringify(wrapper.state())).toEqual(defaultState)
@@ -154,8 +178,8 @@ describe('UALProvider', () => {
     it('that clears the localStorage', () => {
       localStorage.setItem('UALAccountName', 'Example')
       localStorage.setItem('UALLoggedInAuthType', 'Scatter')
-      const invalidateAt = new Date();
-      invalidateAt.setSeconds(invalidateAt.getSeconds() - 1);
+      const invalidateAt = new Date()
+      invalidateAt.setSeconds(invalidateAt.getSeconds() - 1)
       window.localStorage.setItem('UALInvalidateAt', invalidateAt)
       const activeAuthenticator = wrapper.state().availableAuthenticators[0]
       wrapper.setState({

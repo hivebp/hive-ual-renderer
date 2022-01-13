@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { IoMdInformationCircleOutline, IoMdCloseCircleOutline } from 'react-icons/io'
+import {
+  IoMdInformationCircleOutline,
+  IoMdCloseCircleOutline,
+} from 'react-icons/io'
 import i18n from '../../i18n'
 
 import { base } from '../../styles/base'
@@ -41,27 +44,26 @@ export class UALLearnMore extends Component {
     const buttonMessage = open ? i18n.t('learnMoreAccept') : i18n.t('learnMore')
     const info = i18n.t('learnMoreText')
     const accordionStyles = open ? infoExpanded : {}
-    const buttonIcon = open ? <IoMdCloseCircleOutline style={learnMoreIcon} />
-      : <IoMdInformationCircleOutline style={learnMoreIcon} />
+    const buttonIcon = open ? (
+      <IoMdCloseCircleOutline style={learnMoreIcon} />
+    ) : (
+      <IoMdInformationCircleOutline style={learnMoreIcon} />
+    )
     return (
       <div style={base}>
         <div style={{ ...learnMore, ...accordionStyles }}>
-          <p style={learnMoreText}>
-            {info}
-          </p>
+          <p style={learnMoreText}>{info}</p>
         </div>
         <p>
           <span
             style={learnMoreButton}
             onClick={this.toggleMoreInfo}
-            role='button'
+            role="button"
             aria-label={buttonMessage}
             aria-pressed={open}
-            tabIndex='-1'
+            tabIndex="-1"
           >
-            {buttonIcon}
-            {' '}
-            {buttonMessage}
+            {buttonIcon} {buttonMessage}
           </span>
         </p>
       </div>

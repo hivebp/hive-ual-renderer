@@ -6,8 +6,8 @@
 const hexToRGB = (color) => {
   const num = parseInt(color.replace('#', ''), 16)
   const r = (num >> 16) - 30 // eslint-disable-line
-  const b = ((num >> 8) & 0x00FF) - 30 // eslint-disable-line
-  const g = (num & 0x0000FF) - 30 // eslint-disable-line
+  const b = ((num >> 8) & 0x00ff) - 30 // eslint-disable-line
+  const g = (num & 0x0000ff) - 30 // eslint-disable-line
   return [r, b, g]
 }
 
@@ -23,10 +23,11 @@ export const darkenColor = (color) => {
     return '#1A3270'
   }
   if (color.indexOf('rgb') !== -1) {
-    colors = color.replace('rgb(', '')
+    colors = color
+      .replace('rgb(', '')
       .replace(')', '')
       .split(',')
-      .map(num => parseInt(num, 10) - 30)
+      .map((num) => parseInt(num, 10) - 30)
       .map(limitValues)
   } else {
     colors = hexToRGB(color).map(limitValues)

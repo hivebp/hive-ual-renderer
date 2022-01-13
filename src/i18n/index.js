@@ -25,6 +25,6 @@ i18n
       nsMode: 'default',
     },
   })
-  .catch(e => console.warn(e))
+  .catch((e) => console.warn(e))
 
 export default i18n

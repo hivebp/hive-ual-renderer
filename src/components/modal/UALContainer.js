@@ -6,7 +6,7 @@ import {
   containerAnimated,
   containerCenter,
   containerRight,
-  containerLeft
+  containerLeft,
 } from '../../styles/container'
 
 /**
@@ -17,11 +17,13 @@ import {
 export const UALContainer = ({ enter, exit, transitionForward, children }) => {
   const end = transitionForward ? containerLeft : containerRight
   const start = transitionForward ? containerRight : containerLeft
-  const startStyles = (enter || exit) ? containerAnimated : start
+  const startStyles = enter || exit ? containerAnimated : start
   const enterStyles = enter ? containerCenter : {}
   const exitStyles = exit ? end : {}
   return (
-    <div style={{ ...container, ...startStyles, ...enterStyles, ...exitStyles }}>
+    <div
+      style={{ ...container, ...startStyles, ...enterStyles, ...exitStyles }}
+    >
       {children}
     </div>
   )

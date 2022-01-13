@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 
 import i18n from '../../i18n'
 
-import { installButton, installButtonWrapper, buttonText } from '../../styles/installation'
+import {
+  installButton,
+  installButtonWrapper,
+  buttonText,
+} from '../../styles/installation'
 import { baseLink } from '../../styles/base'
 import { buttonHover } from '../../styles/authenticator'
 
@@ -48,9 +52,9 @@ export class UALInstallAuth extends Component {
     return (
       <div style={installButtonWrapper}>
         <div
-          role='button'
-          aria-label='Leave and Install'
-          tabIndex='-1'
+          role="button"
+          aria-label="Leave and Install"
+          tabIndex="-1"
           style={{ ...installButton, background, ...hoverStyle }}
           onMouseEnter={this.activateHoverSize}
           onMouseLeave={this.activateGenericSize}
@@ -58,10 +62,12 @@ export class UALInstallAuth extends Component {
           <a
             style={baseLink}
             href={authenticator.getOnboardingLink()}
-            target='_blank'
-            rel='noopener noreferrer'
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <div style={buttonText} href='authenticator'>{i18n.t('leaveAndInstall')}</div>
+            <div style={buttonText} href="authenticator">
+              {i18n.t('leaveAndInstall')}
+            </div>
           </a>
         </div>
       </div>

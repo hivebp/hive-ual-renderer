@@ -4,8 +4,18 @@ import { UALError, UALErrorType } from 'universal-authenticator-library'
 import { UALErrorMessage } from '../src/components/info/UALErrorMessage'
 
 describe('UALErrorMessage', () => {
-  const errorA = new UALError('This is a message', UALErrorType.Initialization, null, 'UAL')
-  const errorB = new UALError('This is another message', UALErrorType.Initialization, null, 'UAL')
+  const errorA = new UALError(
+    'This is a message',
+    UALErrorType.Initialization,
+    null,
+    'UAL',
+  )
+  const errorB = new UALError(
+    'This is another message',
+    UALErrorType.Initialization,
+    null,
+    'UAL',
+  )
   const wrapperA = render(<UALErrorMessage error={errorA} />)
   const wrapperB = render(<UALErrorMessage error={errorB} />)
 

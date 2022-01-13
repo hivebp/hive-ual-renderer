@@ -16,11 +16,6 @@
     "jsx": "react"
   },
   "lib": ["esnext"],
-  "include": [
-    "src/**/*",
-    "tests/**/*"
-  ],
-  "exclude": [
-    "src/**/*.test.ts"
-  ]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["src/**/*.test.ts"]
 }
