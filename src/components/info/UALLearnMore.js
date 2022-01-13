@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
-import {
-  IoMdInformationCircleOutline,
-  IoMdCloseCircleOutline,
-} from 'react-icons/io'
 import i18n from '../../i18n'
-
 import { base } from '../../styles/base'
 import {
-  learnMore,
   infoExpanded,
-  learnMoreText,
+  learnMore,
   learnMoreButton,
   learnMoreIcon,
+  learnMoreText,
 } from '../../styles/info'
+import { IoMdCloseCircleOutline, IoMdInformationCircleOutline } from '../icons'
 
 /**
  * Component for rendering the "Learn More" text.
