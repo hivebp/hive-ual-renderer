@@ -1,11 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { UALError } from 'universal-authenticator-library'
-
-import { IoMdInformationCircleOutline } from 'react-icons/io'
-
 import { base } from '../../styles/base'
 import { errorMessage } from '../../styles/error'
+import { IoMdInformationCircleOutline } from '../icons'
 
 /**
  * @class
