@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const FaChevronRight = (props) => (
   <svg
     aria-hidden="true"
