@@ -10,6 +10,7 @@ export const exit = {
   color: 'rgb(72, 151, 248)',
   transition: '.3s',
   cursor: 'pointer',
+  width: '16px',
 }
 
 export const exitHover = {

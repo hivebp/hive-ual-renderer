@@ -38,4 +38,6 @@ export const learnMoreButton = {
 export const learnMoreIcon = {
   fontSize: '1rem',
   verticalAlign: 'middle',
+  width: '1em',
+  display: 'inline-block',
 }
