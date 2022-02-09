@@ -1,13 +1,13 @@
-import React from 'react'
 import { mount } from 'enzyme'
 import { providerProps } from 'providerProps'
+import React from 'react'
 import { UALError, UALErrorType } from 'universal-authenticator-library'
-import { UALBox } from '../src/components/modal/UALBox'
-import { UALProvider } from '../src/index'
-import { UALErrorMessage } from '../src/components/info/UALErrorMessage'
-import { UALLoadingIcon } from '../src/components/misc/UALLoadingIcon'
-import { UALAuthButton } from '../src/components/authentication/UALAuthButton'
-import { UALAccountInput } from '../src/components/authentication/UALAccountInput'
+import { UALProvider } from '../../index'
+import { UALAccountInput } from '../authentication/UALAccountInput'
+import { UALAuthButton } from '../authentication/UALAuthButton'
+import { UALErrorMessage } from '../info/UALErrorMessage'
+import { UALLoadingIcon } from '../misc/UALLoadingIcon'
+import { UALBox } from './UALBox'
 
 describe('UALBox', () => {
   let wrapper

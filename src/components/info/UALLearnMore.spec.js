@@ -1,11 +1,7 @@
-import React from 'react'
-import {
-  IoMdInformationCircleOutline,
-  IoMdCloseCircleOutline,
-} from 'react-icons/io'
-
 import { shallow } from 'enzyme'
-import { UALLearnMore } from '../src/components/info/UALLearnMore'
+import React from 'react'
+import { IoMdCloseCircleOutline, IoMdInformationCircleOutline } from '../icons'
+import { UALLearnMore } from './UALLearnMore'
 
 describe('UALLearnMore', () => {
   let wrapper

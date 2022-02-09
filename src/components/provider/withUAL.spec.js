@@ -1,10 +1,9 @@
-import React from 'react'
 import { mount } from 'enzyme'
-
-import { withUAL } from '../src/components/provider/withUAL'
+import React from 'react'
+import { withUAL } from './withUAL'
 
 const mockContext = 'testContext'
-jest.mock('../src/components/provider/UALContext', () => ({
+jest.mock('./UALContext', () => ({
   UALContext: {
     Consumer: ({ children }) => children(mockContext),
   },

@@ -1,11 +1,14 @@
-import React from 'react'
+import { availableAuth, erroredAuth, loadingAuth } from 'AuthenticatorMocks'
 import { shallow } from 'enzyme'
-import { FaChevronRight, FaDownload } from 'react-icons/fa'
-import { IoMdInformationCircleOutline } from 'react-icons/io'
-import { availableAuth, loadingAuth, erroredAuth } from 'AuthenticatorMocks'
-import { UALLoadingIcon } from '../src/components/misc/UALLoadingIcon'
-import { UALAuthButton } from '../src/components/authentication/UALAuthButton'
-import { boxTitles } from '../src/constants/box'
+import React from 'react'
+import { boxTitles } from '../../constants/box'
+import {
+  FaChevronRight,
+  FaDownload,
+  IoMdInformationCircleOutline,
+} from '../icons'
+import { UALLoadingIcon } from '../misc/UALLoadingIcon'
+import { UALAuthButton } from './UALAuthButton'
 
 describe('UALAuthButton', () => {
   const onAuthenticatorSelect = jest.fn()

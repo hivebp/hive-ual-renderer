@@ -1,11 +1,8 @@
+import { mount, shallow } from 'enzyme'
 import React from 'react'
-import { shallow, mount } from 'enzyme'
-import { loadingProps, availableProps } from 'UALAccountInputProps'
-import {
-  UALAccountInput,
-  StyledInput,
-} from '../src/components/authentication/UALAccountInput'
-import { UALLoadingIcon } from '../src/components/misc/UALLoadingIcon'
+import { availableProps, loadingProps } from 'UALAccountInputProps'
+import { UALLoadingIcon } from '../misc/UALLoadingIcon'
+import { StyledInput, UALAccountInput } from './UALAccountInput'
 
 describe('UALAccountInput', () => {
   it('renders an input', () => {

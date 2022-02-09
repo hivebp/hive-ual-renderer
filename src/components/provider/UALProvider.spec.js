@@ -1,10 +1,10 @@
-import React from 'react'
 import { shallow } from 'enzyme'
-import { providerProps } from 'providerProps'
 import { localStorageMock } from 'localStorageMock'
-import { UALBox } from '../src/components/modal/UALBox'
-import { UALProvider } from '../src/index'
-import { DEFAULT_STATUS } from '../src/constants/provider'
+import { providerProps } from 'providerProps'
+import React from 'react'
+import { DEFAULT_STATUS } from '../../constants/provider'
+import { UALProvider } from '../../index'
+import { UALBox } from '../modal/UALBox'
 
 jest.useFakeTimers()
 

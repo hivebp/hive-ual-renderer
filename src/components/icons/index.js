@@ -4,9 +4,6 @@ export const FaChevronRight = (props) => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="chevron-right"
-    class="svg-inline--fa fa-chevron-right fa-w-10"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 320 512"
@@ -23,9 +20,6 @@ export const FaDownload = (props) => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="download"
-    class="svg-inline--fa fa-download fa-w-16"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
@@ -41,9 +35,6 @@ export const FaTimes = (props) => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="times"
-    class="svg-inline--fa fa-times fa-w-11"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 352 512"
@@ -56,34 +47,29 @@ export const FaTimes = (props) => (
   </svg>
 )
 export const IoMdInformationCircleOutline = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="ionicon"
-    viewBox="0 0 512 512"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...props}>
     <title>Information Circle</title>
     <path
       d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z"
       fill="none"
       stroke="currentColor"
-      stroke-miterlimit="10"
-      stroke-width="32"
+      strokeMiterlimit="10"
+      strokeWidth="32"
     />
     <path
       fill="none"
       stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="32"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="32"
       d="M220 220h32v116"
     />
     <path
       fill="none"
       stroke="currentColor"
-      stroke-linecap="round"
-      stroke-miterlimit="10"
-      stroke-width="32"
+      strokeLinecap="round"
+      strokeMiterlimit="10"
+      strokeWidth="32"
       d="M208 340h88"
     />
     <path d="M248 130a26 26 0 1026 26 26 26 0 00-26-26z" />
@@ -91,26 +77,21 @@ export const IoMdInformationCircleOutline = (props) => (
 )
 
 export const IoMdCloseCircleOutline = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="ionicon"
-    viewBox="0 0 512 512"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...props}>
     <title>Close Circle</title>
     <path
       d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
       fill="none"
       stroke="currentColor"
-      stroke-miterlimit="10"
-      stroke-width="32"
+      strokeMiterlimit="10"
+      strokeWidth="32"
     />
     <path
       fill="none"
       stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="32"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="32"
       d="M320 320L192 192M192 320l128-128"
     />
   </svg>
