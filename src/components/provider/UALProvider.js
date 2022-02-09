@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import i18n from '../../i18n'
-import '../../types'
+import React, { Component } from 'react'
 import { UAL, UALError, UALErrorType } from 'universal-authenticator-library'
-
-import { UALContext } from './UALContext'
 import { DEFAULT_STATUS } from '../../constants/provider'
-import { UALBox } from '../modal/UALBox'
-
-import { modalStyles } from '../../styles/provider'
+import i18n from '../../i18n'
 import { baseFont } from '../../styles/base'
+import { modalStyles } from '../../styles/provider'
+import '../../types'
+import { UALBox } from '../modal/UALBox'
+import { UALContext } from './UALContext'
 
 /**
  * Wrapper component that provides a child app with access to UAL functionality

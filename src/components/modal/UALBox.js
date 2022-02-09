@@ -1,17 +1,13 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import React, { Component } from 'react'
+import { boxTitles, defaultBoxState, installGuide } from '../../constants/box'
 import i18n from '../../i18n'
-
-import { UALContainer } from './UALContainer'
+import { box } from '../../styles/box'
+import { mediaQuery } from '../../styles/mediaQuery'
+import { titleWrapper } from '../../styles/title'
 import { withUAL } from '../provider/withUAL'
 import { UALBoxParts } from './UALBoxParts'
-
-import { box } from '../../styles/box'
-import { titleWrapper } from '../../styles/title'
-import { mediaQuery } from '../../styles/mediaQuery'
-
-import { boxTitles, installGuide, defaultBoxState } from '../../constants/box'
+import { UALContainer } from './UALContainer'
 
 /**
  * Component for rendering the box containing the AuthButtons, account input, and handling

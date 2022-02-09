@@ -1,5 +1,5 @@
-import { base } from './base'
 import { authButton } from './authenticator'
+import { base } from './base'
 
 export const inputWrapper = {
   ...base,

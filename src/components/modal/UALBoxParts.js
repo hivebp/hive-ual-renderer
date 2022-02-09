@@ -1,26 +1,24 @@
 import React from 'react'
 import i18n from '../../i18n'
-
-import { UALAccountInput } from '../authentication/UALAccountInput'
-import { UALAuthButton } from '../authentication/UALAuthButton'
-import { UALLearnMore } from '../info/UALLearnMore'
-import { UALExitButton } from '../misc/UALExitButton'
-import { UALErrorMessage } from '../info/UALErrorMessage'
-import { UALLoadingIcon } from '../misc/UALLoadingIcon'
-import { UALInstallAuth } from '../authentication/UALInstallAuth'
-
-import { title, titleSecondary } from '../../styles/title'
 import {
   backButton,
-  backButtonWrapper,
   backButtonText,
+  backButtonWrapper,
 } from '../../styles/buttons/back'
 import { retryButton } from '../../styles/buttons/retry'
 import {
-  secondaryInstructionsText,
   secondaryInstructionsLight,
+  secondaryInstructionsText,
 } from '../../styles/instructions'
+import { title, titleSecondary } from '../../styles/title'
 import { darkenColor } from '../../utils'
+import { UALAccountInput } from '../authentication/UALAccountInput'
+import { UALAuthButton } from '../authentication/UALAuthButton'
+import { UALInstallAuth } from '../authentication/UALInstallAuth'
+import { UALErrorMessage } from '../info/UALErrorMessage'
+import { UALLearnMore } from '../info/UALLearnMore'
+import { UALExitButton } from '../misc/UALExitButton'
+import { UALLoadingIcon } from '../misc/UALLoadingIcon'
 
 /**
  * @class

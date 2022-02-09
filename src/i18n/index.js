@@ -1,5 +1,4 @@
 import i18n from 'i18next'
-
 import resources from './resources'
 
 // this module isn't quite compliant, so it's gotta be imported like this to work

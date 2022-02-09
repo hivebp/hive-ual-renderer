@@ -1,13 +1,12 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-
+import React from 'react'
 import {
+  loadingElementCSS,
+  loadingElementOne,
+  loadingElementThree,
+  loadingElementTwo,
   loadingIcon,
   loadingIconWithContainer,
-  loadingElementOne,
-  loadingElementTwo,
-  loadingElementThree,
-  loadingElementCSS,
 } from '../../styles/loader'
 
 /**

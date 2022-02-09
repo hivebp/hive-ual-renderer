@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import React, { Component } from 'react'
 import i18n from '../../i18n'
-
+import { buttonHover } from '../../styles/authenticator'
+import { baseLink } from '../../styles/base'
 import {
+  buttonText,
   installButton,
   installButtonWrapper,
-  buttonText,
 } from '../../styles/installation'
-import { baseLink } from '../../styles/base'
-import { buttonHover } from '../../styles/authenticator'
 
 /**
  * Component for rendering the authenticator install screen

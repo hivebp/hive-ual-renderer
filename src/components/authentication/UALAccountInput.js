@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import i18n from '../../i18n'
-
-import { UALLoadingIcon } from '../misc/UALLoadingIcon'
-
-import {
-  inputWrapper,
-  inputStyle,
-  buttonEnabled,
-  buttonDisabled,
-} from '../../styles/input'
 import { buttonHover } from '../../styles/authenticator'
+import {
+  buttonDisabled,
+  buttonEnabled,
+  inputStyle,
+  inputWrapper,
+} from '../../styles/input'
 import { buttonText } from '../../styles/installation'
+import { UALLoadingIcon } from '../misc/UALLoadingIcon'
 
 export const StyledInput = styled.input`
   &::-webkit-input-placeholder {
